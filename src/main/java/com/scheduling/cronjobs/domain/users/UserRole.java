@@ -1,6 +1,7 @@
-package com.scheduling.cronjobs.domain;
+package com.scheduling.cronjobs.domain.users;
 
 import javax.persistence.Entity;
+import com.scheduling.cronjobs.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 

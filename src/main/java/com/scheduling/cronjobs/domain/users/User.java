@@ -1,4 +1,4 @@
-package com.scheduling.cronjobs.domain;
+package com.scheduling.cronjobs.domain.users;
 
 import java.util.Set;
 import javax.persistence.Cacheable;
@@ -8,9 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.scheduling.cronjobs.domain.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +18,6 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Immutable;
-
 
 @Accessors(chain = true)
 @Getter

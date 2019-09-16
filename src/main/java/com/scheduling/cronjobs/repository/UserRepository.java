@@ -1,6 +1,6 @@
 package com.scheduling.cronjobs.repository;
 
-import com.scheduling.cronjobs.domain.User;
+import com.scheduling.cronjobs.domain.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

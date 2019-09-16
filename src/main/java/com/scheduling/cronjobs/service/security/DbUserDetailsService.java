@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import com.scheduling.cronjobs.domain.UserRole;
+import com.scheduling.cronjobs.domain.users.UserRole;
 import com.scheduling.cronjobs.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +26,7 @@ public class DbUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(final String username) {
-        com.scheduling.cronjobs.domain.User user = userRepository.findByName(username);
+        com.scheduling.cronjobs.domain.users.User user = userRepository.findByName(username);
 
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException(String.format("User %s not found", username));
@@ -47,7 +47,7 @@ public class DbUserDetailsService implements UserDetailsService {
     }
 
     private User buildUserForAuthentication(
-            com.scheduling.cronjobs.domain.User user,
+            com.scheduling.cronjobs.domain.users.User user,
             List<GrantedAuthority> authorities
     ) {
         return new User(
@@ -60,7 +60,7 @@ public class DbUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserById(final String userId) {
 
-        final com.scheduling.cronjobs.domain.User user = userRepository.findById(userId)
+        final com.scheduling.cronjobs.domain.users.User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(
                         "User %s not found",
                         userId
