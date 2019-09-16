@@ -1,0 +1,113 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="apermyakov">
+        <comment>Init cron job table</comment>
+        <createTable tableName="cron_job" schemaName="public"
+                     remarks="Table for cron job entities">
+            <column name="id" type="int4" autoIncrement="true"
+                    remarks="Cron job id">
+                <constraints nullable="false" unique="true"
+                             primaryKey="true" primaryKeyName="cronJobId"/>
+            </column>
+            <column name="code" type="varchar(64)"
+                    remarks="Code of cron job">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="last_start_time" type="timestamp"
+                    remarks="Last start time">
+            </column>
+            <column name="last_finish_time" type="timestamp"
+                    remarks="Last finish time">
+            </column>
+            <column name="last_success_start_time" type="timestamp"
+                    remarks="Last success start time">
+            </column>
+            <column name="job_result" type="varchar(64)"
+                    remarks="Result of cron job">
+            </column>
+            <column name="job_status" type="varchar(64)"
+                    remarks="Status of cron job">
+            </column>
+            <column name="job_schedule" type="varchar(64)"
+                    remarks="Schedule of cron job">
+            </column>
+            <column name="active" type="boolean"
+                    remarks="Is cron job active">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="apermyakov">
+        <comment>Init cron job logging table</comment>
+        <createTable tableName="cron_job_log" schemaName="public"
+                     remarks="Table for logging cron job actions">
+            <column name="id" type="int4" autoIncrement="true"
+                    remarks="Log id">
+                <constraints nullable="false" unique="true"
+                             primaryKey="true" primaryKeyName="logId"/>
+            </column>
+            <column name="code" type="varchar(64)"
+                    remarks="Code of cron job log">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unique_code" type="varchar(256)"
+                    remarks="Unique code of cron job log with time">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="start_time" type="timestamp"
+                    remarks="Start time of cron job">
+            </column>
+            <column name="finish_time" type="timestamp"
+                    remarks="Finish time of cron job">
+            </column>
+            <column name="job_result" type="varchar(64)"
+                    remarks="Result of cron job">
+            </column>
+            <column name="errors" type="int"
+                    remarks="Number of errors">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="apermyakov">
+        <comment>Init cron job logging table</comment>
+        <createTable tableName="cron_job_error" schemaName="public"
+                     remarks="Table for logging cron job errors">
+            <column name="id" type="int4" autoIncrement="true"
+                    remarks="Error id">
+                <constraints nullable="false" unique="true"
+                             primaryKey="true" primaryKeyName="errorId"/>
+            </column>
+            <column name="entity_id" type="varchar(64)"
+                    remarks="Id of error entity">
+            </column>
+            <column name="entity_type" type="varchar(64)"
+                    remarks="Type of error entity">
+            </column>
+            <column name="log_unique_code" type="varchar(256)"
+                    remarks="Unique code of cron job error with time">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="message" type="varchar(512)"
+                    remarks="Business message error">
+            </column>
+            <column name="stacktrace" type="varchar(2048)"
+                    remarks="Stacktrace of error">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="apermyakov">
+        <comment>Insert example cron job</comment>
+        <insert schemaName="public" tableName="cron_job">
+            <column name="code" value="exampleCronJob"/>
+            <column name="job_schedule" value="0 */10 * * * *"/>
+            <column name="active" value="true"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
