@@ -26,7 +26,7 @@ public class DbUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(final String username) {
-        com.scheduling.cronjobs.domain.users.User user = userRepository.findByName(username);
+        com.scheduling.cronjobs.domain.users.User user = userRepository.findByUsername(username);
 
         if (Objects.isNull(user)) {
             throw new UsernameNotFoundException(String.format("User %s not found", username));
